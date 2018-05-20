@@ -229,7 +229,7 @@ def time_series_graphs(df_clean):
     print('\nFor that lets plot some graphs showing change over time')
 
     print('\nLets look first at this by Ethnicity')
-    #first by ethnicity
+    #All of the below are just printing time series graphs based on data that is given
     race_count = df_clean.groupby('date')
     race_count = race_count.ethnicity.apply(pd.value_counts).unstack(-1).fillna(0)
     race_count.plot(kind='line',figsize=(10,7), title='Stop and Search Count by Race')
@@ -264,6 +264,7 @@ def main():
     period, month, year = get_time_period()
     df_clean = load_data(period, month, year)
 
+    #this will show the breakdowns based upon the user selected inputs called above.
     total_search_breakdown(df_clean)
     ethnicity_breakdown(df_clean)
     objective_breakdown(df_clean)
@@ -277,10 +278,10 @@ def main():
             rand_input = str(input('\nWould you like to see a random stop and search entry? (y/n) \n'))
         # if there is a value error it will print this
         except ValueError:
-            print("{} was sadly not understood".format(rand_input))
+            print('{} was sadly not understood'.format(rand_input))
         # if it is not part of the pre-defined list above it will print this
         if rand_input.lower() not in random_options:
-            print("{}, was sadly not an option".format(rand_input))
+            print('{}, was sadly not an option'.format(rand_input))
             continue
         # if some determined variables are selected it will run the function to show random trips
         # this will loop until 'n' is entered
@@ -293,5 +294,6 @@ def main():
             raise SystemExit
             break
 
+#this is the input that will run the the main funtion which kicks off the script
 if __name__ == '__main__':
     main()
