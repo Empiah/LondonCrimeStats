@@ -20,7 +20,7 @@ def get_time_period():
             print('{} was sadly not understood'.format(period_input))
             continue
         if period_input.lower() not in period_options:
-            print('Sadly {}} was not an option'.format(period_input))
+            print('Sadly {} was not an option'.format(period_input))
             continue
         else:
             period = period_input.lower()
