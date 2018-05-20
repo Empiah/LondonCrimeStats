@@ -88,7 +88,6 @@ def load_data(period, month, year):
     #remove all data for 2015 as it is not useful for analysis
     df['date'] = pd.to_datetime(df['date'])
     df_clean = df[df['date'].dt.year != 2015]
-    df_clean = df_clean.dropna()
 
     #make some columns for the filtering
     df_clean['month'] = df_clean['date'].dt.month
