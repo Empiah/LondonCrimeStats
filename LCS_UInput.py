@@ -240,3 +240,46 @@ def time_series_graphs(df_clean):
     age_count = df_clean.groupby('date')
     age_count = age_count.age_range.apply(pd.value_counts).unstack(-1).fillna(0)
     age_count.plot(kind='line', figsize=(20,10), title='Stop and Search Count by Age');
+
+def random_line(df_clean):
+    # this is used to select a random line of data to look at
+    df_1 = df_clean.sample(n=1)
+    print(df_1)
+
+def main():
+    # this is the main function that we will run, below are the acceptable inputs for a variable below
+    random_options = ['y','n','yes','no']
+    period, month, year = get_time_period()
+    df_clean = load_data(period, month, year)
+
+    total_search_breakdown(df_clean)
+    ethnicity_breakdown(df_clean)
+    objective_breakdown(df_clean)
+    eth_objective_breakdown(df_clean)
+    gender_breakdown(df_clean)
+    age_breakdown(df_clean)
+    time_series_graphs(df_clean)
+
+    while True:
+        try:
+            rand_input = str(input('\nWould you like to see a random stop and search entry? (y/n) \n'))
+        # if there is a value error it will print this
+        except ValueError:
+            print("{} was sadly not understood".format(rand_input))
+        # if it is not part of the pre-defined list above it will print this
+        if rand_input.lower() not in random_options:
+            print("{}, was sadly not an option".format(rand_input))
+            continue
+        # if some determined variables are selected it will run the function to show random trips
+        # this will loop until 'n' is entered
+        elif rand_input.lower() == 'y' or rand_input.lower() == 'yes':
+            random_line(df_clean)
+            continue
+        # if 'n' is chosen the script will shut down
+        else:
+            print("Okay, thanks for analysing some data! We will now exit. Run the script again if you want more insights.")
+            raise SystemExit
+            break
+
+if __name__ == '__main__':
+    main()
