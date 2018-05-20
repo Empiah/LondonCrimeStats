@@ -30,7 +30,7 @@ def get_time_period():
     if period == 'month':
         while True:
             try:
-                year_m_input = int(input('\nYou have selected to filter by month - but we need to choose year too, what do you want to choose? (remember we only have a few months for 2017)'))
+                year_m_input = int(input('\nYou have selected to filter by month - but we need to choose year too, what do you want to choose? (remember we only have a few months for 2017)\n'))
             except ValueError:
                 print('{} was sadly not understood'.format(year_m_input))
                 continue
