@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 def get_time_period():
     period_options = ['month', 'year', 'none']
     month_options = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december']
+    month_options_17 = ['january', 'february', 'march', 'april' ]
     year_options = [2016, 2017]
 
     print('\nHello, in this script you will be able to get details about London stop and search data!')
@@ -29,6 +30,18 @@ def get_time_period():
     if period == 'month':
         while True:
             try:
+                year_m_input = int(input('\nYou have selected to filter by month - but we need to choose year too, what do you want to choose? (remember we only have a few months for 2017)'))
+            except ValueError:
+                print('{} was sadly not understood'.format(year_m_input))
+                continue
+            if year_m_input not in year_options:
+                print('{} that was not a year on the list, its 2016 or 2017...'.format(year_m_input))
+                continue
+            else:
+                year = year_m_input
+                break
+        while True:
+            try:
                 month_input = str(input('\nYou have selected to filter by month - lets see what month you want to look at!'))
             except ValueError:
                 print('{} was sadly not understood'.format(month_input))
@@ -36,15 +49,16 @@ def get_time_period():
             if month_input.lower() not in month_options:
                 print('Apologies, {} is not actually a month....'.format(month_input))
                 continue
+            if year_m_input == 2017 and month_input.lower() not in month_options_17:
+                print('Apologies, we do not have {} data for 2017...'.format(month_input.title()))
             else:
                 month = month_input.lower()
-                year = 'all'
                 break
     #if the user wants to search by year, lets find out what year
     elif period == 'year':
         while True:
             try:
-                year_input = int(input('\nSo you want to search by year (remember we only have a few month for 2017), what year shall we search on?'))
+                year_input = int(input('\nPlease enter the year you want to search on (remember we only have a few months for 2017), what year shall we search on?'))
             except ValueError:
                 print('{} that is not a legitimate thing to enter'.format(year_input))
                 continue
@@ -66,7 +80,7 @@ def get_time_period():
 #if we filter the data it becomes so much easier to do analysis on
 def load_data(period, month, year):
     #load the dataset from Kaggle (https://www.kaggle.com/sohier/london-police-records)
-    df = pd.read_csv('/Users/oliverphipps/Dropbox/6. Python/Python Projects/LondonCrimeStatistics/london-stop-and-search.csv', low_memory=False)
+    df = pd.read_csv('C:/Users/phipp/Dropbox/6. Python/Python Projects/LondonCrimeStatistics/london-stop-and-search.csv', low_memory=False)
 
     #as I have done analysis on this already via Jupyter notebooks I know that I have to clean this data
     #renaming columns to something more applicable
