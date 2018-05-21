@@ -32,7 +32,7 @@ def get_time_period():
             try:
                 year_m_input = int(input('\nYou have selected to filter by month - but we need to choose year too, what do you want to choose? (remember we only have a few months for 2017)\n'))
             except ValueError:
-                print('{} was sadly not understood'.format(year_m_input))
+                print('Sadly not understood, enter a year, 2016 or 2017...')
                 continue
             if year_m_input not in year_options:
                 print('{} that was not a year on the list, its 2016 or 2017...'.format(year_m_input))
@@ -227,7 +227,7 @@ def objective_breakdown(df_clean):
             print('{} was not a legit input, needs to be a string'.format(ob2_input))
             continue
         if ob2_input not in plot_options:
-            print('{} was not a valid input, needs to be "y" or "n"'.format(ob2_input)
+            print('{} was not a valid input, needs to be "y" or "n"'.format(ob2_input))
             continue
         if ob2_input == 'y':
             # this will plot a pie chart for us using the above
