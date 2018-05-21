@@ -216,8 +216,8 @@ def objective_breakdown(df_clean):
     drugs_prc = df_clean.object_of_search[drugs].count() / drugs_p_crimdam
     criminal_damage_prc = df_clean.object_of_search[criminal_damage].count() / drugs_p_crimdam
 
-    print('Percentage that is drugs: ' + drugs_prc)
-    print('Percentage that is Criminal Damage: ' + criminal_damage_prc)
+    print('Percentage that is drugs: ' + str(drugs_prc))
+    print('Percentage that is Criminal Damage: ' + str(criminal_damage_prc))
 
     plot_options = ['y', 'n']
     while True:
@@ -323,9 +323,9 @@ def gender_breakdown(df_clean):
     gender_female_prc = df_clean.gender[gender_female].count() / len(df_clean)
     gender_other_prc = df_clean.gender[gender_other].count() / len(df_clean)
 
-    print('Percentage that is male: ' + gender_other_prc)
-    print('Percentage that is female: ' + gender_female_prc)
-    print('Percentage that is other: ' + gender_other_prc)
+    print('Percentage that is male: ' + str(gender_other_prc))
+    print('Percentage that is female: ' + str(gender_female_prc))
+    print('Percentage that is other: ' + str(gender_other_prc)
 
     plot_options = ['y', 'n']
     while True:
@@ -368,11 +368,11 @@ def age_breakdown(df_clean):
     age_25_prc = df_clean.age_range[age_25].count() / len(df_clean)
     age_34_prc = df_clean.age_range[age_34].count() / len(df_clean)
 
-    print('Percentage that is under 10: ' + age_u10_prc)
-    print('Percentage that is 10-17: ' + age_10_prc)
-    print('Percentage that is under 18-24: ' + age_18_prc)
-    print('Percentage that is under 25-34: ' + age_25_prc)
-    print('Percentage that is under 35+: ' + age_34_prc)
+    print('Percentage that is under 10: ' + str(age_u10_prc))
+    print('Percentage that is 10-17: ' + str(age_10_prc))
+    print('Percentage that is under 18-24: ' + str(age_18_prc))
+    print('Percentage that is under 25-34: ' + str(age_25_prc))
+    print('Percentage that is under 35+: ' + str(age_34_prc))
 
     plot_options = ['y', 'n']
     while True:
@@ -399,25 +399,25 @@ def age_breakdown(df_clean):
             break
 
     print('\nNow lets analyse this more by looking at age by Objective of search')
-        print(df_clean.groupby('object_of_search')['age_range'].value_counts().unstack(0))
+    print(df_clean.groupby('object_of_search')['age_range'].value_counts().unstack(0))
 
-        plot_options = ['y', 'n']
-        while True:
-            try:
-                ab_input = str(input('\nDo you want to see this? (in graph format) (y/n)'))
-            except ValueError:
-                print('{} was not a legit input, needs to be a string')
-                continue
-            if ab_input not in plot_options:
-                print('{} was not a valid input, needs to be "y" or "n"')
-                continue
-            if ab_input == 'y':
-                df_clean.groupby('object_of_search')['age_range'].value_counts().unstack(0).plot.bar(title='Age range by Object of Search', figsize=(10,7))
-                plt.show()
-                break
-            else:
-                print('Okay not a problem - the graph will not be shown')
-                break
+    plot_options = ['y', 'n']
+    while True:
+        try:
+            ab2_input = str(input('\nDo you want to see this? (in graph format) (y/n)'))
+        except ValueError:
+            print('{} was not a legit input, needs to be a string')
+            continue
+        if ab2_input not in plot_options:
+            print('{} was not a valid input, needs to be "y" or "n"')
+            continue
+        if ab2_input == 'y':
+            df_clean.groupby('object_of_search')['age_range'].value_counts().unstack(0).plot.bar(title='Age range by Object of Search', figsize=(10,7))
+            plt.show()
+            break
+        else:
+            print('Okay not a problem - the graph will not be shown')
+            break
 
 def time_series_graphs(df_clean):
     print('\nWe have looked at top level statistics now, but what is useful is to see how things change over time')
