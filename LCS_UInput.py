@@ -210,7 +210,7 @@ def objective_breakdown(df_clean):
     criminal_damage = df_clean.object_of_search == 'Articles for use in criminal damage'
 
     #creating a total that we can use as denominator for the percentage calculator
-    drugs_p_crimdam = df_clean.object_of_search[criminal_damage].count() + df_clean.object_of_search[criminal_damage].count()
+    drugs_p_crimdam = df_clean.object_of_search[drugs].count() + df_clean.object_of_search[criminal_damage].count()
 
     #creating some percentages for the pie chart
     drugs_prc = df_clean.object_of_search[drugs].count() / drugs_p_crimdam
@@ -323,7 +323,7 @@ def gender_breakdown(df_clean):
     gender_female_prc = df_clean.gender[gender_female].count() / len(df_clean)
     gender_other_prc = df_clean.gender[gender_other].count() / len(df_clean)
 
-    print('Percentage that is male: ' + str(gender_other_prc))
+    print('Percentage that is male: ' + str(gender_male_prc))
     print('Percentage that is female: ' + str(gender_female_prc))
     print('Percentage that is other: ' + str(gender_other_prc))
 
