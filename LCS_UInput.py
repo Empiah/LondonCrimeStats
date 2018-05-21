@@ -10,7 +10,7 @@ def get_time_period():
     year_options = [2016, 2017]
 
     print('\nHello, in this script you will be able to get details about London stop and search data!')
-    print('\nFirst thing that we want to do is see what time period you want to view the information for.')
+    print('\nFirst thing that we want to do is see what time period you want to view the data for.')
     print('\nBy default we will range from January 2016 to April 2017, but you have the option to filter the data')
 
     #This will ask for an input to see how the user wants to search the data. The loop merely ensures that what we select is supported.
