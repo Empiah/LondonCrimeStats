@@ -423,30 +423,86 @@ def time_series_graphs(df_clean):
     print('\nWe have looked at top level statistics now, but what is useful is to see how things change over time')
     print('\nFor that lets plot some graphs showing change over time')
 
-    print('\nLets look first at this by Ethnicity')
-    #All of the below are just printing time series graphs based on data that is given
-    race_count = df_clean.groupby('date')
-    race_count = race_count.ethnicity.apply(pd.value_counts).unstack(-1).fillna(0)
-    race_count.plot(kind='line',figsize=(10,7), title='Stop and Search Count by Race')
-    plt.show()
+    plot_options = ['y', 'n']
+    while True:
+        try:
+            ts_input = str(input('\nLets first look at ethnicity - do you want to see this? (in graph format) (y/n)'))
+        except ValueError:
+            print('{} was not a legit input, needs to be a string')
+            continue
+        if ts_input not in plot_options:
+            print('{} was not a valid input, needs to be "y" or "n"')
+            continue
+        if ts_input == 'y':
+            #All of the below are just printing time series graphs based on data that is given
+            race_count = df_clean.groupby('date')
+            race_count = race_count.ethnicity.apply(pd.value_counts).unstack(-1).fillna(0)
+            race_count.plot(kind='line',figsize=(10,7), title='Stop and Search Count by Race')
+            plt.show()
+            break
+        else:
+            print('Okay not a problem - the graph will not be shown')
+            break
 
-    print('\nNow by objective of search')
-    object_count = df_clean.groupby('date')
-    object_count = object_count.object_of_search.apply(pd.value_counts).unstack(-1).fillna(0)
-    object_count.plot(kind='line',figsize=(10,7), title='Stop and Search Count by Object of Search')
-    plt.show()
+    plot_options = ['y', 'n']
+    while True:
+        try:
+            ts2_input = str(input('\nNext lets see by objective of search - do you want to see this? (in graph format) (y/n)'))
+        except ValueError:
+            print('{} was not a legit input, needs to be a string')
+            continue
+        if ts2_input not in plot_options:
+            print('{} was not a valid input, needs to be "y" or "n"')
+            continue
+        if ts2_input == 'y':
+            object_count = df_clean.groupby('date')
+            object_count = object_count.object_of_search.apply(pd.value_counts).unstack(-1).fillna(0)
+            object_count.plot(kind='line',figsize=(10,7), title='Stop and Search Count by Object of Search')
+            plt.show()
+            break
+        else:
+            print('Okay not a problem - the graph will not be shown')
+            break
 
-    print('\nAnd by Gender')
-    gender_count = df_clean.groupby('date')
-    gender_count = gender_count.gender.apply(pd.value_counts).unstack(-1).fillna(0)
-    gender_count.plot(kind='line',figsize=(10,7), title='Stop and Search Count by Gender')
-    plt.show()
+    plot_options = ['y', 'n']
+    while True:
+        try:
+            ts3_input = str(input('\nNow by Gender - do you want to see this? (in graph format) (y/n)'))
+        except ValueError:
+            print('{} was not a legit input, needs to be a string')
+            continue
+        if ts3_input not in plot_options:
+            print('{} was not a valid input, needs to be "y" or "n"')
+            continue
+        if ts3_input == 'y':
+            gender_count = df_clean.groupby('date')
+            gender_count = gender_count.gender.apply(pd.value_counts).unstack(-1).fillna(0)
+            gender_count.plot(kind='line',figsize=(10,7), title='Stop and Search Count by Gender')
+            plt.show()
+            break
+        else:
+            print('Okay not a problem - the graph will not be shown')
+            break
 
-    print('\nLastly, age')
-    age_count = df_clean.groupby('date')
-    age_count = age_count.age_range.apply(pd.value_counts).unstack(-1).fillna(0)
-    age_count.plot(kind='line', figsize=(10,7), title='Stop and Search Count by Age')
-    plt.show()
+    plot_options = ['y', 'n']
+    while True:
+        try:
+            ts4_input = str(input('\nLastly by Age - do you want to see this? (in graph format) (y/n)'))
+        except ValueError:
+            print('{} was not a legit input, needs to be a string')
+            continue
+        if ts4_input not in plot_options:
+            print('{} was not a valid input, needs to be "y" or "n"')
+            continue
+        if ts4_input == 'y':
+            age_count = df_clean.groupby('date')
+            age_count = age_count.age_range.apply(pd.value_counts).unstack(-1).fillna(0)
+            age_count.plot(kind='line', figsize=(10,7), title='Stop and Search Count by Age')
+            plt.show()
+            break
+        else:
+            print('Okay not a problem - the graph will not be shown')
+            break
 
 def random_line(df_clean):
     # this is used to select a random line of data to look at
