@@ -138,10 +138,10 @@ def total_search_breakdown(df_clean):
         try:
             tsb_input = str(input('\nDo you want to see this in graph format? (y/n)'))
         except ValueError:
-            print('{} was not a legit input, needs to be a string')
+            print('{} was not a legit input, needs to be a string'.format(tsb_input))
             continue
         if tsb_input not in plot_options:
-            print('{} was not a valid input, needs to be "y" or "n"')
+            print('{} was not a valid input, needs to be "y" or "n"'.format(tsb_input))
             continue
         if tsb_input == 'y':
             plt.figure(figsize=(10,7))
@@ -165,10 +165,10 @@ def ethnicity_breakdown(df_clean):
         try:
             eb_input = str(input('\nDo you want to see this in graph format? (y/n)'))
         except ValueError:
-            print('{} was not a legit input, needs to be a string')
+            print('{} was not a legit input, needs to be a string'.format(eb_input))
             continue
         if eb_input not in plot_options:
-            print('{} was not a valid input, needs to be "y" or "n"')
+            print('{} was not a valid input, needs to be "y" or "n"'.format(eb_input))
             continue
         if eb_input == 'y':
             df_clean['ethnicity'].value_counts().plot.bar(title='stop_and_search_by_ethnicity',figsize=(10,7))
@@ -188,10 +188,10 @@ def objective_breakdown(df_clean):
         try:
             ob_input = str(input('\nDo you want to see this in graph format? (y/n)'))
         except ValueError:
-            print('{} was not a legit input, needs to be a string')
+            print('{} was not a legit input, needs to be a string'.format(ob_input))
             continue
         if ob_input not in plot_options:
-            print('{} was not a valid input, needs to be "y" or "n"')
+            print('{} was not a valid input, needs to be "y" or "n"'.format(ob_input))
             continue
         if ob_input == 'y':
             df_clean['object_of_search'].value_counts().plot.bar(title='Stop and Search by Object of Search',figsize=(10,7))
@@ -224,10 +224,10 @@ def objective_breakdown(df_clean):
         try:
             ob2_input = str(input('\nDo you want to see this? (in graph format) (y/n)'))
         except ValueError:
-            print('{} was not a legit input, needs to be a string')
+            print('{} was not a legit input, needs to be a string'.format(ob2_input))
             continue
         if ob2_input not in plot_options:
-            print('{} was not a valid input, needs to be "y" or "n"')
+            print('{} was not a valid input, needs to be "y" or "n"'.format(ob2_input)
             continue
         if ob2_input == 'y':
             # this will plot a pie chart for us using the above
@@ -254,10 +254,10 @@ def eth_objective_breakdown(df_clean):
         try:
             eob_input = str(input('\nDo you want to see this? (in graph format) (y/n)'))
         except ValueError:
-            print('{} was not a legit input, needs to be a string')
+            print('{} was not a legit input, needs to be a string'.format(eob_input))
             continue
         if eob_input not in plot_options:
-            print('{} was not a valid input, needs to be "y" or "n"')
+            print('{} was not a valid input, needs to be "y" or "n"'.format(eob_input))
             continue
         if eob_input == 'y':
             df_clean.groupby('ethnicity')['object_of_search'].value_counts().unstack(0).plot.bar(title='Object of search by Ethnicity', figsize=(10,7))
@@ -275,10 +275,10 @@ def eth_objective_breakdown(df_clean):
         try:
             eob2_input = str(input('\nDo you want to see this? (in graph format) (y/n)'))
         except ValueError:
-            print('{} was not a legit input, needs to be a string')
+            print('{} was not a legit input, needs to be a string'.format(eob2_input))
             continue
         if eob2_input not in plot_options:
-            print('{} was not a valid input, needs to be "y" or "n"')
+            print('{} was not a valid input, needs to be "y" or "n"'.format(eob2_input))
             continue
         if eob2_input == 'y':
             df_clean.groupby('object_of_search')['ethnicity'].value_counts().unstack(0).plot.bar(title='Ethnicity by Object of Search', figsize=(10,7))
@@ -298,10 +298,10 @@ def gender_breakdown(df_clean):
         try:
             gb_input = str(input('\nDo you want to see this? (in graph format) (y/n)'))
         except ValueError:
-            print('{} was not a legit input, needs to be a string')
+            print('{} was not a legit input, needs to be a string'.format(gb_input))
             continue
         if gb_input not in plot_options:
-            print('{} was not a valid input, needs to be "y" or "n"')
+            print('{} was not a valid input, needs to be "y" or "n"'.format(gb_input))
             continue
         if gb_input == 'y':
             df_clean.groupby('object_of_search')['gender'].value_counts().unstack(0).plot.bar(title='Gender by Object of Search', figsize=(10,7));
@@ -332,10 +332,10 @@ def gender_breakdown(df_clean):
         try:
             gb2_input = str(input('\nDo you want to see this? (in graph format) (y/n)'))
         except ValueError:
-            print('{} was not a legit input, needs to be a string')
+            print('{} was not a legit input, needs to be a string'.format(gb2_input))
             continue
         if gb2_input not in plot_options:
-            print('{} was not a valid input, needs to be "y" or "n"')
+            print('{} was not a valid input, needs to be "y" or "n"'.format(gb2_input))
             continue
         if gb2_input == 'y':
             # this will plot a pie chart for us using the calcs above
@@ -379,10 +379,10 @@ def age_breakdown(df_clean):
         try:
             ab_input = str(input('\nDo you want to see this? (in graph format) (y/n)'))
         except ValueError:
-            print('{} was not a legit input, needs to be a string')
+            print('{} was not a legit input, needs to be a string'.format(ab_input))
             continue
         if ab_input not in plot_options:
-            print('{} was not a valid input, needs to be "y" or "n"')
+            print('{} was not a valid input, needs to be "y" or "n"'.format(ab_input))
             continue
         if ab_input == 'y':
              # and a pie chart
@@ -406,10 +406,10 @@ def age_breakdown(df_clean):
         try:
             ab2_input = str(input('\nDo you want to see this? (in graph format) (y/n)'))
         except ValueError:
-            print('{} was not a legit input, needs to be a string')
+            print('{} was not a legit input, needs to be a string'.format(ab2_input))
             continue
         if ab2_input not in plot_options:
-            print('{} was not a valid input, needs to be "y" or "n"')
+            print('{} was not a valid input, needs to be "y" or "n"'.format(ab2_input))
             continue
         if ab2_input == 'y':
             df_clean.groupby('object_of_search')['age_range'].value_counts().unstack(0).plot.bar(title='Age range by Object of Search', figsize=(10,7))
@@ -428,10 +428,10 @@ def time_series_graphs(df_clean):
         try:
             ts_input = str(input('\nLets first look at ethnicity - do you want to see this? (in graph format) (y/n)'))
         except ValueError:
-            print('{} was not a legit input, needs to be a string')
+            print('{} was not a legit input, needs to be a string'.format(ts_input))
             continue
         if ts_input not in plot_options:
-            print('{} was not a valid input, needs to be "y" or "n"')
+            print('{} was not a valid input, needs to be "y" or "n"'.format(ts_input))
             continue
         if ts_input == 'y':
             #All of the below are just printing time series graphs based on data that is given
@@ -449,10 +449,10 @@ def time_series_graphs(df_clean):
         try:
             ts2_input = str(input('\nNext lets see by objective of search - do you want to see this? (in graph format) (y/n)'))
         except ValueError:
-            print('{} was not a legit input, needs to be a string')
+            print('{} was not a legit input, needs to be a string').format(ts2_input)
             continue
         if ts2_input not in plot_options:
-            print('{} was not a valid input, needs to be "y" or "n"')
+            print('{} was not a valid input, needs to be "y" or "n"'.format(ts2_input))
             continue
         if ts2_input == 'y':
             object_count = df_clean.groupby('date')
@@ -469,10 +469,10 @@ def time_series_graphs(df_clean):
         try:
             ts3_input = str(input('\nNow by Gender - do you want to see this? (in graph format) (y/n)'))
         except ValueError:
-            print('{} was not a legit input, needs to be a string')
+            print('{} was not a legit input, needs to be a string'.format(ts3_input))
             continue
         if ts3_input not in plot_options:
-            print('{} was not a valid input, needs to be "y" or "n"')
+            print('{} was not a valid input, needs to be "y" or "n"'.format(ts3_input))
             continue
         if ts3_input == 'y':
             gender_count = df_clean.groupby('date')
@@ -489,10 +489,10 @@ def time_series_graphs(df_clean):
         try:
             ts4_input = str(input('\nLastly by Age - do you want to see this? (in graph format) (y/n)'))
         except ValueError:
-            print('{} was not a legit input, needs to be a string')
+            print('{} was not a legit input, needs to be a string'.format(ts4_input))
             continue
         if ts4_input not in plot_options:
-            print('{} was not a valid input, needs to be "y" or "n"')
+            print('{} was not a valid input, needs to be "y" or "n"'.format(ts4_input))
             continue
         if ts4_input == 'y':
             age_count = df_clean.groupby('date')
