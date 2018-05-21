@@ -80,7 +80,7 @@ def get_time_period():
 #if we filter the data it becomes so much easier to do analysis on
 def load_data(period, month, year):
     #load the dataset from Kaggle (https://www.kaggle.com/sohier/london-police-records)
-    df = pd.read_csv('C:/Users/phipp/Dropbox/6. Python/Python Projects/LondonCrimeStatistics/london-stop-and-search.csv', low_memory=False)
+    df = pd.read_csv('/Users/oliverphipps/Dropbox/6. Python/Python Projects/LondonCrimeStatistics/london-stop-and-search.csv', low_memory=False)
 
     #as I have done analysis on this already via Jupyter notebooks I know that I have to clean this data
     #renaming columns to something more applicable
@@ -127,25 +127,79 @@ def load_data(period, month, year):
 def total_search_breakdown(df_clean):
     count_by_date = df_clean.groupby('date').size()
 
-    print('\nThe below plot shows the count of total stop and search')
+    print('\nThe below table shows the count of total stop and search by month')
 
-    plt.figure(figsize=(10,7))
-    plt.xlabel('Date')
-    plt.ylabel('Count of Stop and Search Record')
-    plt.title('Time series graph showing stop and search activity')
-    plt.plot(count_by_date)
-    plt.show()
+    date_to_month = df_clean.date.dt.to_period("M")
+    date_group = df_clean.groupby(date_to_month)
+    print(date_group['date'].count())
+
+    plot_options = ['y', 'n', 'yes', 'no']
+    while True:
+        try:
+            tsb_input = str(input('\nDo you want to see this in graph format? (y/n)'))
+        except ValueError:
+            print('{} was not a legit input, needs to be a string')
+            continue
+        if tsb_input not in plot_options:
+            print('{} was not a valid input, needs to be "y" or "n"')
+            continue
+        if tsb_input == 'y':
+            plt.figure(figsize=(10,7))
+            plt.xlabel('Date')
+            plt.ylabel('Count of Stop and Search Record')
+            plt.title('Time series graph showing stop and search activity')
+            plt.plot(count_by_date)
+            plt.show()
+            break
+        else:
+            print('Okay not a problem - the graph will not be shown')
+            break
 
 def ethnicity_breakdown(df_clean):
-    print('\nThe below plot shows the count of stop and search by ethnicity')
+    print('\nThe below table shows the count of stop and search by ethnicity')
 
-    df_clean['ethnicity'].value_counts().plot.bar(title='stop_and_search_by_ethnicity',figsize=(10,7))
-    plt.show()
+    print(df_clean['ethnicity'].value_counts())
+
+    plot_options = ['y', 'n', 'yes', 'no']
+    while True:
+        try:
+            tsb_input = str(input('\nDo you want to see this in graph format? (y/n)'))
+        except ValueError:
+            print('{} was not a legit input, needs to be a string')
+            continue
+        if tsb_input not in plot_options:
+            print('{} was not a valid input, needs to be "y" or "n"')
+            continue
+        if tsb_input == 'y':
+            df_clean['ethnicity'].value_counts().plot.bar(title='stop_and_search_by_ethnicity',figsize=(10,7))
+            plt.show()
+            break
+        else:
+            print('Okay not a problem - the graph will not be shown')
+            break
 
 def objective_breakdown(df_clean):
-    print('\nThe below shoes the count of stop and search by objective')
+    print('\nThe below table shoes the count of stop and search by objective')
 
-    df_clean['object_of_search'].value_counts().plot.bar(title='Stop and Search by Object of Search',figsize=(10,7));
+    print(df_clean['object_of_search'].value_counts())
+
+    plot_options = ['y', 'n', 'yes', 'no']
+    while True:
+        try:
+            tsb_input = str(input('\nDo you want to see this in graph format? (y/n)'))
+        except ValueError:
+            print('{} was not a legit input, needs to be a string')
+            continue
+        if tsb_input not in plot_options:
+            print('{} was not a valid input, needs to be "y" or "n"')
+            continue
+        if tsb_input == 'y':
+            df_clean['object_of_search'].value_counts().plot.bar(title='Stop and Search by Object of Search',figsize=(10,7))
+            plt.show()
+            break
+        else:
+            print('Okay not a problem - the graph will not be shown')
+            break
 
     print('\nThe below groups "Controlled Drugs" and "Articles for use in Criminal Damage" and shows them as a percentage of each other')
     counts = df_clean['object_of_search'].value_counts()
@@ -162,14 +216,29 @@ def objective_breakdown(df_clean):
     drugs_prc = df_clean.object_of_search[drugs].count() / drugs_p_crimdam
     criminal_damage_prc = df_clean.object_of_search[criminal_damage].count() / drugs_p_crimdam
 
-    # this will plot a pie chart for us using the above
-    labels = 'Controlled Drugs', 'Articles for use in criminal damage'
-    fracs = [drugs_prc, criminal_damage_prc]
-    explode = (0,0)
-    plt.axis("equal")
-    plt.title('Percentage Drug vs. Weapons search as pct of Drugs plus Weapons')
-    plt.pie(fracs, explode=explode, labels=labels, autopct='%.0f%%', shadow=True)
-    plt.show()
+    plot_options = ['y', 'n', 'yes', 'no']
+    while True:
+        try:
+            tsb_input = str(input('\nDo you want to see this? (in graph format) (y/n)'))
+        except ValueError:
+            print('{} was not a legit input, needs to be a string')
+            continue
+        if tsb_input not in plot_options:
+            print('{} was not a valid input, needs to be "y" or "n"')
+            continue
+        if tsb_input == 'y':
+            # this will plot a pie chart for us using the above
+            labels = 'Controlled Drugs', 'Articles for use in criminal damage'
+            fracs = [drugs_prc, criminal_damage_prc]
+            explode = (0,0)
+            plt.axis("equal")
+            plt.title('Percentage Drug vs. Weapons search as pct of Drugs plus Weapons')
+            plt.pie(fracs, explode=explode, labels=labels, autopct='%.0f%%', shadow=True)
+            plt.show()
+            break
+        else:
+            print('Okay not a problem - the graph will not be shown')
+            break
 
 def eth_objective_breakdown(df_clean):
     print('\nThe below groups ethnicity and obective breakdowns together to try and show us some trends')
