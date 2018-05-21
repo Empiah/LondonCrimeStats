@@ -133,7 +133,7 @@ def total_search_breakdown(df_clean):
     date_group = df_clean.groupby(date_to_month)
     print(date_group['date'].count())
 
-    plot_options = ['y', 'n', 'yes', 'no']
+    plot_options = ['y', 'n']
     while True:
         try:
             tsb_input = str(input('\nDo you want to see this in graph format? (y/n)'))
@@ -160,17 +160,17 @@ def ethnicity_breakdown(df_clean):
 
     print(df_clean['ethnicity'].value_counts())
 
-    plot_options = ['y', 'n', 'yes', 'no']
+    plot_options = ['y', 'n']
     while True:
         try:
-            tsb_input = str(input('\nDo you want to see this in graph format? (y/n)'))
+            eb_input = str(input('\nDo you want to see this in graph format? (y/n)'))
         except ValueError:
             print('{} was not a legit input, needs to be a string')
             continue
-        if tsb_input not in plot_options:
+        if eb_input not in plot_options:
             print('{} was not a valid input, needs to be "y" or "n"')
             continue
-        if tsb_input == 'y':
+        if eb_input == 'y':
             df_clean['ethnicity'].value_counts().plot.bar(title='stop_and_search_by_ethnicity',figsize=(10,7))
             plt.show()
             break
@@ -183,17 +183,17 @@ def objective_breakdown(df_clean):
 
     print(df_clean['object_of_search'].value_counts())
 
-    plot_options = ['y', 'n', 'yes', 'no']
+    plot_options = ['y', 'n']
     while True:
         try:
-            tsb_input = str(input('\nDo you want to see this in graph format? (y/n)'))
+            ob_input = str(input('\nDo you want to see this in graph format? (y/n)'))
         except ValueError:
             print('{} was not a legit input, needs to be a string')
             continue
-        if tsb_input not in plot_options:
+        if ob_input not in plot_options:
             print('{} was not a valid input, needs to be "y" or "n"')
             continue
-        if tsb_input == 'y':
+        if ob_input == 'y':
             df_clean['object_of_search'].value_counts().plot.bar(title='Stop and Search by Object of Search',figsize=(10,7))
             plt.show()
             break
@@ -216,20 +216,20 @@ def objective_breakdown(df_clean):
     drugs_prc = df_clean.object_of_search[drugs].count() / drugs_p_crimdam
     criminal_damage_prc = df_clean.object_of_search[criminal_damage].count() / drugs_p_crimdam
 
-    print('Percentage that is drugs: ' drugs_prc)
-    print('Percentage that is Criminal Damage: ' criminal_damage_prc)
+    print('Percentage that is drugs: ' + drugs_prc)
+    print('Percentage that is Criminal Damage: ' + criminal_damage_prc)
 
-    plot_options = ['y', 'n', 'yes', 'no']
+    plot_options = ['y', 'n']
     while True:
         try:
-            tsb_input = str(input('\nDo you want to see this? (in graph format) (y/n)'))
+            ob2_input = str(input('\nDo you want to see this? (in graph format) (y/n)'))
         except ValueError:
             print('{} was not a legit input, needs to be a string')
             continue
-        if tsb_input not in plot_options:
+        if ob2_input not in plot_options:
             print('{} was not a valid input, needs to be "y" or "n"')
             continue
-        if tsb_input == 'y':
+        if ob2_input == 'y':
             # this will plot a pie chart for us using the above
             labels = 'Controlled Drugs', 'Articles for use in criminal damage'
             fracs = [drugs_prc, criminal_damage_prc]
@@ -247,18 +247,71 @@ def eth_objective_breakdown(df_clean):
     print('\nThe below groups ethnicity and obective breakdowns together to try and show us some trends')
 
     print('\nFirst by objective of search and then by ethnicity')
-    df_clean.groupby('ethnicity')['object_of_search'].value_counts().unstack(0).plot.bar(title='Object of search by Ethnicity', figsize=(10,7))
-    plt.show()
+    print(df_clean.groupby('ethnicity')['object_of_search'].value_counts().unstack(0))
+
+    plot_options = ['y', 'n']
+    while True:
+        try:
+            eob_input = str(input('\nDo you want to see this? (in graph format) (y/n)'))
+        except ValueError:
+            print('{} was not a legit input, needs to be a string')
+            continue
+        if eob_input not in plot_options:
+            print('{} was not a valid input, needs to be "y" or "n"')
+            continue
+        if eob_input == 'y':
+            df_clean.groupby('ethnicity')['object_of_search'].value_counts().unstack(0).plot.bar(title='Object of search by Ethnicity', figsize=(10,7))
+            plt.show()
+            break
+        else:
+            print('Okay not a problem - the graph will not be shown')
+            break
 
     print('\nAnd now by ethnicity and then objective of search')
-    df_clean.groupby('object_of_search')['ethnicity'].value_counts().unstack(0).plot.bar(title='Ethnicity by Object of Search', figsize=(10,7))
-    plt.show()
+    print(df_clean.groupby('object_of_search')['ethnicity'].value_counts().unstack(0))
+
+    plot_options = ['y', 'n']
+    while True:
+        try:
+            eob2_input = str(input('\nDo you want to see this? (in graph format) (y/n)'))
+        except ValueError:
+            print('{} was not a legit input, needs to be a string')
+            continue
+        if eob2_input not in plot_options:
+            print('{} was not a valid input, needs to be "y" or "n"')
+            continue
+        if eob2_input == 'y':
+            df_clean.groupby('object_of_search')['ethnicity'].value_counts().unstack(0).plot.bar(title='Ethnicity by Object of Search', figsize=(10,7))
+            plt.show()
+            break
+        else:
+            print('Okay not a problem - the graph will not be shown')
+            break
 
 def gender_breakdown(df_clean):
-    print('\nThis here will show us a bar chart of Gender by the Objective of search')
-    df_clean.groupby('object_of_search')['gender'].value_counts().unstack(0).plot.bar(title='Gender by Object of Search', figsize=(10,7));
+    print('\nThis here will show us a table of Gender by the Objective of search')
 
-    print('\nNow lets see that total stop and search counts by Gender')
+    print(df_clean.groupby('object_of_search')['gender'].value_counts().unstack(0))
+
+    plot_options = ['y', 'n']
+    while True:
+        try:
+            gb_input = str(input('\nDo you want to see this? (in graph format) (y/n)'))
+        except ValueError:
+            print('{} was not a legit input, needs to be a string')
+            continue
+        if gb_input not in plot_options:
+            print('{} was not a valid input, needs to be "y" or "n"')
+            continue
+        if gb_input == 'y':
+            df_clean.groupby('object_of_search')['gender'].value_counts().unstack(0).plot.bar(title='Gender by Object of Search', figsize=(10,7));
+            plt.show()
+            break
+        else:
+            print('Okay not a problem - the graph will not be shown')
+            break
+
+    print('\nNow lets see that total stop and search counts by Gender as a percentage of total')
 
     #creating some masks
     gender_male = df_clean.gender == 'Male'
@@ -270,14 +323,33 @@ def gender_breakdown(df_clean):
     gender_female_prc = df_clean.gender[gender_female].count() / len(df_clean)
     gender_other_prc = df_clean.gender[gender_other].count() / len(df_clean)
 
-    # this will plot a pie chart for us using the calcs above
-    labels = 'Male', 'Female', 'Other'
-    fracs = [gender_male_prc, gender_female_prc, gender_other_prc]
-    explode = (0.0,0,0)
-    plt.axis("equal")
-    plt.title('Percentage of Stop and Search by Gender')
-    plt.pie(fracs, explode=explode, labels=labels, autopct='%.0f%%', shadow=True)
-    plt.show()
+    print('Percentage that is male: ' + gender_other_prc)
+    print('Percentage that is female: ' + gender_female_prc)
+    print('Percentage that is other: ' + gender_other_prc)
+
+    plot_options = ['y', 'n']
+    while True:
+        try:
+            gb2_input = str(input('\nDo you want to see this? (in graph format) (y/n)'))
+        except ValueError:
+            print('{} was not a legit input, needs to be a string')
+            continue
+        if gb2_input not in plot_options:
+            print('{} was not a valid input, needs to be "y" or "n"')
+            continue
+        if gb2_input == 'y':
+            # this will plot a pie chart for us using the calcs above
+            labels = 'Male', 'Female', 'Other'
+            fracs = [gender_male_prc, gender_female_prc, gender_other_prc]
+            explode = (0.0,0,0)
+            plt.axis("equal")
+            plt.title('Percentage of Stop and Search by Gender')
+            plt.pie(fracs, explode=explode, labels=labels, autopct='%.0f%%', shadow=True)
+            plt.show()
+            break
+        else:
+            print('Okay not a problem - the graph will not be shown')
+            break
 
 def age_breakdown(df_clean):
     print('\nNow lets see a gender breakdown by count as percentage of total')
@@ -296,18 +368,56 @@ def age_breakdown(df_clean):
     age_25_prc = df_clean.age_range[age_25].count() / len(df_clean)
     age_34_prc = df_clean.age_range[age_34].count() / len(df_clean)
 
-     # and a pie chart
-    labels = 'Under 10', '10-17', '18-24', '25-34', '35+'
-    fracs = [age_u10_prc, age_10_prc, age_18_prc, age_25_prc, age_34_prc]
-    explode = (0,0,0,0,0)
-    plt.axis("equal")
-    plt.title('Percentage of Stop and Search by Age range')
-    plt.pie(fracs, explode=explode, labels=labels, autopct='%.0f%%', shadow=True)
-    plt.show()
+    print('Percentage that is under 10: ' + age_u10_prc)
+    print('Percentage that is 10-17: ' + age_10_prc)
+    print('Percentage that is under 18-24: ' + age_18_prc)
+    print('Percentage that is under 25-34: ' + age_25_prc)
+    print('Percentage that is under 35+: ' + age_34_prc)
+
+    plot_options = ['y', 'n']
+    while True:
+        try:
+            ab_input = str(input('\nDo you want to see this? (in graph format) (y/n)'))
+        except ValueError:
+            print('{} was not a legit input, needs to be a string')
+            continue
+        if ab_input not in plot_options:
+            print('{} was not a valid input, needs to be "y" or "n"')
+            continue
+        if ab_input == 'y':
+             # and a pie chart
+            labels = 'Under 10', '10-17', '18-24', '25-34', '35+'
+            fracs = [age_u10_prc, age_10_prc, age_18_prc, age_25_prc, age_34_prc]
+            explode = (0,0,0,0,0)
+            plt.axis("equal")
+            plt.title('Percentage of Stop and Search by Age range')
+            plt.pie(fracs, explode=explode, labels=labels, autopct='%.0f%%', shadow=True)
+            plt.show()
+            break
+        else:
+            print('Okay not a problem - the graph will not be shown')
+            break
 
     print('\nNow lets analyse this more by looking at age by Objective of search')
-    df_clean.groupby('object_of_search')['age_range'].value_counts().unstack(0).plot.bar(title='Age range by Object of Search', figsize=(10,7))
-    plt.show()
+        print(df_clean.groupby('object_of_search')['age_range'].value_counts().unstack(0))
+
+        plot_options = ['y', 'n']
+        while True:
+            try:
+                ab_input = str(input('\nDo you want to see this? (in graph format) (y/n)'))
+            except ValueError:
+                print('{} was not a legit input, needs to be a string')
+                continue
+            if ab_input not in plot_options:
+                print('{} was not a valid input, needs to be "y" or "n"')
+                continue
+            if ab_input == 'y':
+                df_clean.groupby('object_of_search')['age_range'].value_counts().unstack(0).plot.bar(title='Age range by Object of Search', figsize=(10,7))
+                plt.show()
+                break
+            else:
+                print('Okay not a problem - the graph will not be shown')
+                break
 
 def time_series_graphs(df_clean):
     print('\nWe have looked at top level statistics now, but what is useful is to see how things change over time')
