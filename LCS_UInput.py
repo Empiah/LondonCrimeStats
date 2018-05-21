@@ -216,6 +216,9 @@ def objective_breakdown(df_clean):
     drugs_prc = df_clean.object_of_search[drugs].count() / drugs_p_crimdam
     criminal_damage_prc = df_clean.object_of_search[criminal_damage].count() / drugs_p_crimdam
 
+    print('Percentage that is drugs: ' drugs_prc)
+    print('Percentage that is Criminal Damage: ' criminal_damage_prc)
+
     plot_options = ['y', 'n', 'yes', 'no']
     while True:
         try:
