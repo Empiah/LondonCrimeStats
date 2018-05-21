@@ -325,7 +325,7 @@ def gender_breakdown(df_clean):
 
     print('Percentage that is male: ' + str(gender_other_prc))
     print('Percentage that is female: ' + str(gender_female_prc))
-    print('Percentage that is other: ' + str(gender_other_prc)
+    print('Percentage that is other: ' + str(gender_other_prc))
 
     plot_options = ['y', 'n']
     while True:
