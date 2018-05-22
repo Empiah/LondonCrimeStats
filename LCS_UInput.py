@@ -2,6 +2,8 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
+pd.options.mode.chained_assignment = None
+
 #this function is to get the uder time that we will use for exploring data
 def get_time_period():
     period_options = ['month', 'year', 'none']
@@ -246,7 +248,7 @@ def objective_breakdown(df_clean):
 def eth_objective_breakdown(df_clean):
     print('\nThe below groups ethnicity and obective breakdowns together to try and show us some trends')
 
-    print('\nFirst by objective of search and then by ethnicity')
+    print('\nHere is a table by objective of search and then by ethnicity')
     print(df_clean.groupby('ethnicity')['object_of_search'].value_counts().unstack(0))
 
     plot_options = ['y', 'n']
@@ -267,13 +269,10 @@ def eth_objective_breakdown(df_clean):
             print('Okay not a problem - the graph will not be shown')
             break
 
-    print('\nAnd now by ethnicity and then objective of search')
-    print(df_clean.groupby('object_of_search')['ethnicity'].value_counts().unstack(0))
-
     plot_options = ['y', 'n']
     while True:
         try:
-            eob2_input = str(input('\nDo you want to see this? (in graph format) (y/n)'))
+            eob2_input = str(input('\nDo you want to see a graph that maps by ethnicity and then objective of search? (in graph format) (y/n)'))
         except ValueError:
             print('{} was not a legit input, needs to be a string'.format(eob2_input))
             continue
@@ -291,7 +290,7 @@ def eth_objective_breakdown(df_clean):
 def gender_breakdown(df_clean):
     print('\nThis here will show us a table of Gender by the Objective of search')
 
-    print(df_clean.groupby('object_of_search')['gender'].value_counts().unstack(0))
+    print(df_clean.groupby('gender')['object_of_search'].value_counts().unstack(0))
 
     plot_options = ['y', 'n']
     while True:
@@ -330,7 +329,7 @@ def gender_breakdown(df_clean):
     plot_options = ['y', 'n']
     while True:
         try:
-            gb2_input = str(input('\nDo you want to see this? (in graph format) (y/n)'))
+            gb2_input = str(input('\nDo you want to see a this? (in graph format) (y/n)'))
         except ValueError:
             print('{} was not a legit input, needs to be a string'.format(gb2_input))
             continue
@@ -370,9 +369,9 @@ def age_breakdown(df_clean):
 
     print('Percentage that is under 10: ' + str(age_u10_prc))
     print('Percentage that is 10-17: ' + str(age_10_prc))
-    print('Percentage that is under 18-24: ' + str(age_18_prc))
-    print('Percentage that is under 25-34: ' + str(age_25_prc))
-    print('Percentage that is under 35+: ' + str(age_34_prc))
+    print('Percentage that is 18-24: ' + str(age_18_prc))
+    print('Percentage that is 25-34: ' + str(age_25_prc))
+    print('Percentage that is 35+: ' + str(age_34_prc))
 
     plot_options = ['y', 'n']
     while True:
@@ -399,7 +398,7 @@ def age_breakdown(df_clean):
             break
 
     print('\nNow lets analyse this more by looking at age by Objective of search')
-    print(df_clean.groupby('object_of_search')['age_range'].value_counts().unstack(0))
+    print(df_clean.groupby('age_range')['object_of_search'].value_counts().unstack(0))
 
     plot_options = ['y', 'n']
     while True:
