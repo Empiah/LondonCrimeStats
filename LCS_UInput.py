@@ -64,7 +64,7 @@ def get_time_period():
             except ValueError:
                 print('{} that is not a legitimate thing to enter'.format(year_input))
                 continue
-            if year_input not in year_options:
+            if year_input not in year_options:ta
                 print('{} that was not a year on the list, its 2016 or 2017...'.format(year_input))
                 continue
             else:
@@ -82,7 +82,7 @@ def get_time_period():
 #if we filter the data it becomes so much easier to do analysis on
 def load_data(period, month, year):
     #load the dataset from Kaggle (https://www.kaggle.com/sohier/london-police-records)
-    df = pd.read_csv('/Users/oliverphipps/Dropbox/6. Python/Python Projects/LondonCrimeStatistics/london-stop-and-search.csv', low_memory=False)
+    df = pd.read_csv('Data/london-stop-and-search.csv', low_memory=False)
 
     #as I have done analysis on this already via Jupyter notebooks I know that I have to clean this data
     #renaming columns to something more applicable
