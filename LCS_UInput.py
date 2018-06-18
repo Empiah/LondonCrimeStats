@@ -64,7 +64,6 @@ def get_time_period():
             except ValueError:
                 print('{} that is not a legitimate thing to enter'.format(year_input))
                 continue
-            if year_input not in year_options:ta
                 print('{} that was not a year on the list, its 2016 or 2017...'.format(year_input))
                 continue
             else:
@@ -197,6 +196,7 @@ def objective_breakdown(df_clean):
             continue
         if ob_input.lower() == 'y':
             df_clean['object_of_search'].value_counts().plot.bar(title='Stop and Search by Object of Search',figsize=(10,7))
+                df_clean['object_of_search'].value_counts().plot.bar(title='Stop and Search by Object of Search',figsize=(10,7))
             plt.show()
             break
         else:
